@@ -9,6 +9,7 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Event from "./views/Event";
 import EventInfo from "./views/EventInfo";
+import Planning from "./views/Planning";
 
 function App() {
   return (
