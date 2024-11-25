@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const VSS = () => {
+
+const VSS = ({VSSName}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -41,8 +42,7 @@ const VSS = () => {
         {isOpen && (
           <div className="mt-2 p-4 text-sm text-center font-lalezar text-[25.21px]">
             <p>
-              Voici le contenu déroulant ! Ajoute ici des informations pertinentes ou
-              tout autre élément.
+            Valeur saisie : <strong>{VSSName || "Aucune donnée"}</strong>
             </p>
           </div>
         )}
@@ -52,3 +52,4 @@ const VSS = () => {
 };
 
 export default VSS;
+// Il faut que le composant soit en ovrlay sur le reste de la page (pour l'instant ca bouge) et que titou mette la police sur tailwind

@@ -17,7 +17,7 @@ export default function Event() {
           <p>image, horaires, lieu</p>
         </div>
         <div className="VSS"> 
-          <VSS/>
+        <VSS VSSName= "Lisa" />       
         </div>
         <div className="boissons"> carroussel des boissons </div>
         <div className="nourriture"> </div>
