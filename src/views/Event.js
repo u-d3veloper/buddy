@@ -1,8 +1,32 @@
 import React from "react";
 import VSS from "../components/VSS";
 import Nourriture from "../components/Nourriture";
+import Boisson from "../components/Boisson";
+import ListeBoissons from "../components/ListeBoissons";
 // import { useParams } from 'react-router-dom';
 export default function Event() {
+  const boissons = [
+    {
+      nom: "Pina Collada",
+      prix: "2",
+      lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-tropical-kamasutra.jpg",
+    },
+    {
+      nom: "Mojito",
+      prix: "3",
+      lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-mojito.jpg",
+    },
+    {
+      nom: "Daiquiri",
+      prix: "4",
+      lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-daiquiri.jpg",
+    },
+    {
+      nom: "Caipirinha",
+      prix: "3",
+      lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-caipirinha.jpg",
+    },
+  ];
   return (
     <div>
       <div class="bg-zinc-800	r h-screen w-screen text-white	" id="wrapper">
@@ -36,10 +60,11 @@ export default function Event() {
         <div className="VSS">
           <VSS VSSName="Lisa" />
         </div>
-        <div className="boissons"> carroussel des boissons </div>
-        <div className="nourriture">
-          <Nourriture />{" "}
+        <div className="boissons">
+          {" "}
+          <ListeBoissons boissons={boissons} />{" "}
         </div>
+        <div className="nourriture"></div>
         <div className="footer">
           <p> vestiaire, summeria</p>
         </div>

@@ -1,37 +1,33 @@
 import React from "react";
 
-const Nourriture = () => {
+const Nourriture = (props) => {
   return (
-    <div className="flex bg-zinc-700">
+    <div className="w-3/4 flex mx-auto bg-zinc-700 border-solid rounded-3xl ">
       <div id="image" className="w-1/2 ">
         <img
           id="Visuel_Nourriture"
-          src="https://www.shutterstock.com/image-photo/burger-tomateoes-lettuce-pickles-on-600nw-2309539129.jpg"
-          alt="burger"
-          className=" w-full h-full object-cover"
+          src={props.lien}
+          alt={props.nom}
+          className=" w-full h-full object-cover object-[70%] "
         />
       </div>
 
-      <div id="Detail_et_prix" className="w-1/2 p-4">
-        <p className="text-center text-amber-500 text-2xl mb-4 mt-0">
-          Burger + Frite
+      <div id="Detail_et_prix" className="w-1/2 p-4 object-cover w-full">
+        <p className="  text-center text-amber-500 text-xl mb-4 mt-0">
+          {props.nom}
         </p>
-        <ul className="mb-4">
-          <li>
-            <div className="flex justify-between">
-              <p>Classique</p>
-              <p>6€</p>
+        <ul className="mb-4 list-disc pl-5">
+          {props.formules.map((formule, index) => (
+          <li key={index}>
+            <div className="flex justify-between mb-2">
+              <p>{formule.nom}</p>
+              <p>{formule.prix}€</p>
             </div>
           </li>
-          <li>
-            <div className="flex justify-between">
-              <p>Vegie</p>
-              <p>5€</p>
-            </div>
-          </li>
+          ))}
         </ul>
-        <p id="Menu" className="text-center">
-          +1€ Soft
+        <p id="Menu" className="text-center ">
+          {props.infoMenu}
         </p>
       </div>
     </div>
