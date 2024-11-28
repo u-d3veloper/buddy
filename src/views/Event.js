@@ -27,6 +27,16 @@ export default function Event() {
       lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-caipirinha.jpg",
     },
   ];
+  const burgerProps = {
+    lien: "https://img.freepik.com/photos-gratuite/burger-gastronomique-grille-fromage-tomate-oignon-frites-genere-par-intelligence-artificielle_25030-63181.jpg", // Remplace par une image de burger
+    nom: "Burger",
+    formules: [
+      { nom: "Classique", prix: 6 },
+      { nom: "Végé", prix: 5 },
+    ],
+    infoMenu: "+1€ soft", // Information complémentaire
+  };
+
   return (
     <div>
       <div class="bg-zinc-800	r h-screen w-screen text-white	" id="wrapper">
@@ -61,17 +71,16 @@ export default function Event() {
             class="w-[208px] h-[171px] object-cover rounded-r-[61px]"
           />
 
-<div class="flex flex-col justify-center items-end text-lg font-medium w-full h-full">
-    <div class="flex items-center space-x-2">
-        <p>Horaire</p>
-        <i class="fa-solid fa-clock text-xl"></i>
-    </div>
-    <div class="flex items-center space-x-2">
-        <p>Lieu</p>
-        <i class="fa-solid fa-location-dot text-xl"></i>
-    </div>
-</div>
-
+          <div class="flex flex-col justify-center items-end text-lg font-medium w-full h-full">
+            <div class="flex items-center space-x-2">
+              <p>Horaire</p>
+              <i class="fa-solid fa-clock text-xl"></i>
+            </div>
+            <div class="flex items-center space-x-2">
+              <p>Lieu</p>
+              <i class="fa-solid fa-location-dot text-xl"></i>
+            </div>
+          </div>
         </div>
 
         <div className="VSS">
@@ -81,7 +90,9 @@ export default function Event() {
           {" "}
           <ListeBoissons boissons={boissons} />{" "}
         </div>
-        <div className="nourriture"></div>
+        <div className="nourriture">
+          <Nourriture props={burgerProps} />
+        </div>
         <div className="footer">
           <p> vestiaire, summeria</p>
         </div>
