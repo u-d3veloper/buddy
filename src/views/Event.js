@@ -1,5 +1,6 @@
 import React from "react";
 import VSS from "../components/VSS";
+import Nourriture from "../components/Nourriture";
 // import { useParams } from 'react-router-dom';
 export default function Event() {
   return (
@@ -53,7 +54,9 @@ export default function Event() {
           <VSS VSSName="Lisa" />
         </div>
         <div className="boissons"> carroussel des boissons </div>
-        <div className="nourriture"> </div>
+        <div className="nourriture">
+          <Nourriture />{" "}
+        </div>
         <div className="footer">
           <p> vestiaire, summeria</p>
         </div>
