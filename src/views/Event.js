@@ -54,9 +54,26 @@ export default function Event() {
             </div>
           </div>
         </div>
-        <div className="infos">
-          <p>image, horaires, lieu</p>
+        <div class="flex items-center w-full py-3" id="infos">
+          <img
+            src="https://lkb-blog-images.linkaband.com/blog-musique/animation-musicale/organiser-soiree-halloween/102119-thumbnail-resized-BLOG_SEO.jpg"
+            alt="Image soirée"
+            class="w-[208px] h-[171px] object-cover rounded-r-[61px]"
+          />
+
+<div class="flex flex-col justify-center items-end text-lg font-medium w-full h-full">
+    <div class="flex items-center space-x-2">
+        <p>Horaire</p>
+        <i class="fa-solid fa-clock text-xl"></i>
+    </div>
+    <div class="flex items-center space-x-2">
+        <p>Lieu</p>
+        <i class="fa-solid fa-location-dot text-xl"></i>
+    </div>
+</div>
+
         </div>
+
         <div className="VSS">
           <VSS VSSName="Lisa" />
         </div>
