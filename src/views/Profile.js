@@ -1,83 +1,85 @@
-import React, { useState } from 'react';
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
-import { signOut } from 'firebase/auth';
-
+import React, { useState, useEffect } from 'react';
+import Banner from '../components/Banner';
+import UserInfo from '../components/UserInfo';
+import { signInWithGoogle, signOutUser } from '../services/firebaseAuth';
+import Navbar from '../components/Navbar';
 export default function Profile() {
-  const [user, setUser] = useState(null); // État utilisateur
+  const [user, setUser] = useState(null); // État pour stocker l'utilisateur
   const [error, setError] = useState(null); // État pour gérer les erreurs
 
+  // Charger l'utilisateur depuis le localStorage uniquement au montage du composant
+  useEffect(() => {
+    console.log(localStorage.getItem('user'));
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser)); // Valider et définir l'utilisateur si trouvé
+      } catch (err) {
+        console.error('Erreur lors du parsing de localStorage :', err.message);
+        localStorage.removeItem('user'); // Nettoyer les données corrompues
+      }
+    }
+  }, [user]);
+
   const handleSignIn = async () => {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
-
-    // Ajouter des paramètres personnalisés si nécessaire
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    provider.setCustomParameters({
-      login_hint: 'prenom.nom@ensc.fr',
-    });
-
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log('Utilisateur connecté:', user);
-
-      // Mettre à jour l'état utilisateur
-      setUser({
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-      });
+      const userInfo = await signInWithGoogle(); // Se connecter via Google
+      setUser(userInfo); // Mettre à jour l'utilisateur
+      setError(null); // Réinitialiser les erreurs
     } catch (err) {
-      console.error('Erreur lors de la connexion:', err.message);
-      setError(err.message); // Stocker le message d'erreur pour l'afficher
+      console.error('Erreur lors de la connexion :', err.message);
+      setError(err.message); // Définir l'erreur
     }
   };
 
   const handleSignOut = async () => {
-    const auth = getAuth();
     try {
-      await signOut(auth);
-      setUser(null); // Réinitialiser l'état utilisateur
-      console.log('Utilisateur déconnecté');
+      await signOutUser(); // Se déconnecter
+      setUser(null); // Réinitialiser l'utilisateur
+      localStorage.removeItem('user'); // Supprimer du localStorage
+      setError(null); // Réinitialiser les erreurs
     } catch (err) {
-      console.error('Erreur lors de la déconnexion:', err.message);
+      console.error('Erreur lors de la déconnexion :', err.message);
+      setError(err.message); // Définir l'erreur
     }
   };
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold">Profile</h1>
-      <button
-        className="border border-slate-500 rounded p-2 hover:bg-slate-200"
-        onClick={handleSignIn}
-      >
-        Sign in with Google
-      </button>
+    <div className="bg-gray-50 h-screen">
+      <Banner />
+      <div className="p-4">
+        {user ? ( // Si un utilisateur est connecté, afficher ses informations
+          <>
+            <UserInfo user={user} />
+            <div className="flex justify-center">
+              <button
+                className="border border-red-500 rounded-3xl px-3 py-2 mt-4 bg-red-500 text-white hover:bg-red-600"
+                onClick={handleSignOut}
+              >
+                Sign out
+              </button>
+            </div>
+          </>
+        ) : ( // Sinon, inviter l'utilisateur à se connecter
+          <>
+            <h1 className="text-3xl font-bold text-center">Salut !</h1>
+            <h2 className="text-xl text-center px-2 my-2">
+              Connecte-toi pour commencer à faire la fête
+            </h2>
+            <div className="flex justify-center">
+              <button
+                className="border border-slate-500 rounded-3xl px-4 py-2 hover:bg-slate-200"
+                onClick={handleSignIn}
+              >
+                <i className="fa-brands fa-google mr-3"></i>Sign in with Google
+              </button>
+            </div>
+          </>
+        )}
 
-      {user ? (
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold">Bienvenue, {user.displayName}!</h2>
-          <p>Email : {user.email}</p>
-          <img
-            src={user.photoURL}
-            alt="User Avatar"
-            className="rounded-full mt-2"
-            style={{ width: '50px', height: '50px' }}
-          />
-        </div>
-      ) : (
-        <p className="text-gray-500 mt-4">Aucun utilisateur connecté.</p>
-      )}
-
-      {error && (
-        <p className="text-red-500 mt-4">Erreur : {error}</p>
-      )}
-      <button
-        className="border border-red-500 rounded p-2 mt-4 hover:bg-red-200"
-        onClick={handleSignOut}
-      >
-        Sign out
-      </button>
+        {error && <p className="text-red-500 mt-4">Erreur : {error}</p>} {/* Affichage des erreurs */}
+      </div>
+      <Navbar />
     </div>
   );
 }
