@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCollection } from '../services/fetchData'; // Assure-toi que le chemin est correct
-
+import Navbar from '../components/Navbar';
+import Banner from '../components/Banner';
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,9 +25,7 @@ const Home = () => {
 
   return (
     <div className="bg-gray-50 h-screen">
-      <div className="container flex justify-center mt-2">
-        <img src="assets/images/logo_full_black.png" alt="Logo" />
-      </div>
+      <Banner/>
       <div className="container flex justify-center flex-col">
         {loading ? (
           <div>Chargement...</div>
@@ -51,23 +50,7 @@ const Home = () => {
           </ul>
         )}
       </div>
-      <div className="container flex justify-around fixed bottom-0 align-center">
-        <a href="/">
-          <div className="m-2 p-2">
-            <i className="text-4xl fa-solid fa-bars"></i>
-          </div>
-        </a>
-        <a href="/event">
-          <div className="m-2 p-2 border-2 border-black rounded-xl">
-            <i className="text-4xl fa-solid fa-champagne-glasses"></i>
-          </div>
-        </a>
-        <a href="/profile">
-          <div className="m-2 p-2">
-            <i className="text-4xl fa-solid fa-user"></i>
-          </div>
-        </a>
-      </div>
+      <Navbar />
     </div>
   );
 };
