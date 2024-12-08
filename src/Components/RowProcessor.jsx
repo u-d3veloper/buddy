@@ -1,12 +1,12 @@
 // src/components/RowProcessor.js
 import React from 'react';
-import Tache from '../Components/Tache.js' ;
+import Tache from './Tache.jsx' ;
 
 const RowProcessor = ({ row, value}) => {
   if (value === 1) {
     return (
       <div>
-        <Tache HeureDebut={row.HeureDebut} HeureFin={row.HeureFin} action={row.Taches} couleur={row.Couleur}/>
+        <Tache Color={row.Couleur} HeureDebut={row.HeureDebut} HeureFin={row.HeureFin} action={row.Taches} />
       </div>
     );
   } else {

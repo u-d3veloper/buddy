@@ -3,27 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import RowProcessor from './RowProcessor';
 
-export default function CSVReader(props){
+export default function CSVReader({soiree , user}){
   const [csvData, setCsvData] = useState([]);
-  const [columnName, setColumnName] = useState('');
   const [columnIndex, setColumnIndex] = useState(null);
   const [error, setError] = useState(null);
-  const soiree = {props};
-
-  // Load the TXT file to get the column name
-  const loadColumnName = () => {
-    fetch('/user.txt')
-      .then((response) => response.text())
-      .then((data) => {
-        const text = data.trim();
-        setColumnName(text);
-      })
-      .catch((err) => setError('Error loading text file'));
-  };
 
   // Load the CSV data
-  const loadCSV = () => {
-    Papa.parse('/soiree Halloween.csv', {//A modifier
+  const loadCSV = (soiree) => {
+    Papa.parse('/planning/'+soiree+'.csv', {//A modifier
       download: true,
       header: true,
       dynamicTyping: true,
@@ -37,8 +24,8 @@ export default function CSVReader(props){
   };
 
   // Find the column index matching the column name from TXT file
-  const findColumnIndex = (header) => {
-    const index = header.findIndex((column) => column.toLowerCase() === columnName.toLowerCase());
+  const findColumnIndex = (header,email) => {
+    const index = header.findIndex((column) => column.toLowerCase() === email.toLowerCase());
     if (index !== -1) {
       setColumnIndex(index);
     } else {
@@ -47,21 +34,20 @@ export default function CSVReader(props){
   };
 
   useEffect(() => {
-    loadColumnName();
-    loadCSV();
+    loadCSV(soiree);
   }, []);
 
   useEffect(() => {
-    if (csvData.length && columnName) {
+    if (csvData.length) {
       const headers = Object.keys(csvData[0]);
-      findColumnIndex(headers);
+      findColumnIndex(headers,user);
     }
-  }, [csvData, columnName]);
+  }, [csvData]);
 
   return (
     <div>
         <div className="container flex justify-center text-lg font-bold">
-            <p>Planning de {props.soiree}</p>
+            <p>Planning de {soiree}</p>
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {columnIndex !== null && (

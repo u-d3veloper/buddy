@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCollection } from '../services/fetchData'; // Assure-toi que le chemin est correct
-import Navbar from '../components/Navbar';
-import Banner from '../components/Banner';
+import Navbar from '../Components/Navbar';
+import Banner from '../Components/Banner';
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
