@@ -57,7 +57,7 @@ const Home = () => {
             <i className="text-4xl fa-solid fa-bars"></i>
           </div>
         </a>
-        <a href="/event">
+        <a href={`/event/${data[0].id}`}>
           <div className="m-2 p-2 border-2 border-black rounded-xl">
             <i className="text-4xl fa-solid fa-champagne-glasses"></i>
           </div>

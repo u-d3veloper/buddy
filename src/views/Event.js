@@ -3,9 +3,32 @@ import VSS from "../components/VSS";
 import Nourriture from "../components/Nourriture";
 import Boisson from "../components/Boisson";
 import ListeBoissons from "../components/ListeBoissons";
+import { useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchEvent } from "../services/fetchEvent";
 // import { useParams } from 'react-router-dom';
 export default function Event() {
-  const boissons = [
+let { id } = useParams();
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const dataList = await fetchEvent('events',id);
+      console.log('Données récupérées :', dataList);
+      setData(dataList);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des données :', error);
+    } finally {
+      setLoading(false);
+      console.log('Données dans le state :', data);
+    }
+  };
+
+  getData();
+}, []);
+
+const boissons = [
     {
       nom: "Pina Collada",
       prix: "2",
@@ -27,50 +50,56 @@ export default function Event() {
       lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-caipirinha.jpg",
     },
   ];
+
+
+
   return (
     <div>
-      <div class="bg-zinc-800	r h-screen w-screen text-white	" id="wrapper">
+      <div className="bg-zinc-800	r h-screen w-screen text-white	" id="wrapper">
         <div
-          class="flex items-center justify-between w-full px-4 py-3"
+          className="flex items-center justify-between w-full px-4 py-3"
           id="header"
         >
-          <i class="fa-solid fa-train-tram text-3xl"></i>
+          <i className="fa-solid fa-train-tram text-3xl"></i>
 
-          <p class="text-2xl font-bold">Buddy</p>
+          <p className="text-2xl font-bold">Buddy</p>
 
-          <i class="fa-solid fa-glass-cheers text-3xl"></i>
+          <i className="fa-solid fa-glass-cheers text-3xl"></i>
         </div>
 
-        <div class="flex items-center justify-between w-full px-4">
-          <i class="fa-solid fa-chevron-left text-white text-xl"></i>
+        <div className="flex items-center justify-between w-full px-4">
+          <i className="fa-solid fa-chevron-left text-white text-xl"></i>
 
-          <div class="flex items-center space-x-2">
-            <div class="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+          <div className="flex items-center space-x-2">
+            <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
 
-            <div class="w-[255px] h-[41px] bg-white border border-gray-300 flex rounded-[21px] items-center justify-center">
-              <span class="text-gray-700 text-sm font-medium">
+            <div className="w-[255px] h-[41px] bg-white border border-gray-300 flex rounded-[21px] items-center justify-center">
+              <span className="text-gray-700 text-sm font-medium">
                 Texte à l'intérieur
               </span>
             </div>
           </div>
         </div>
-        <div class="flex items-center w-full py-3" id="infos">
+        <div className="flex items-center w-full py-3" id="infos">
           <img
             src="https://lkb-blog-images.linkaband.com/blog-musique/animation-musicale/organiser-soiree-halloween/102119-thumbnail-resized-BLOG_SEO.jpg"
-            alt="Image soirée"
-            class="w-[208px] h-[171px] object-cover rounded-r-[61px]"
+            alt="soirée"
+            className="w-[208px] h-[171px] object-cover rounded-r-[61px]"
           />
 
-<div class="flex flex-col justify-center items-end text-lg font-medium w-full h-full">
-    <div class="flex items-center space-x-2">
-        <p>Horaire</p>
-        <i class="fa-solid fa-clock text-xl"></i>
-    </div>
-    <div class="flex items-center space-x-2">
-        <p>Lieu</p>
-        <i class="fa-solid fa-location-dot text-xl"></i>
-    </div>
+<div className="flex flex-col  items-end justify-center font-medium w-full h-full ">
+  <div className="flex items-center space-x-2">
+  <p>Horaire</p>
+    <i className="fa-solid fa-clock text-xl"></i>
+   
+  </div>
+  <div className="flex items-center space-x-2 mt-2">
+  <p>Lieu</p>
+    <i className="fa-solid fa-location-dot text-xl"></i>
+    
+  </div>
 </div>
+
 
         </div>
 
