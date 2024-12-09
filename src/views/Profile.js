@@ -3,6 +3,7 @@ import Banner from '../Components/Banner';
 import UserInfo from '../Components/UserInfo';
 import { signInWithGoogle, signOutUser } from '../services/firebaseAuth';
 import Navbar from '../Components/Navbar';
+
 export default function Profile() {
   const [user, setUser] = useState(null); // État pour stocker l'utilisateur
   const [error, setError] = useState(null); // État pour gérer les erreurs
@@ -46,7 +47,7 @@ export default function Profile() {
 
   return (
     <div className="bg-gray-50 h-screen">
-      <Banner />
+      <Banner/>
       <div className="p-4">
         {user ? ( // Si un utilisateur est connecté, afficher ses informations
           <>
@@ -78,6 +79,15 @@ export default function Profile() {
         )}
 
         {error && <p className="text-red-500 mt-4">Erreur : {error}</p>} {/* Affichage des erreurs */}
+      </div>
+      <div>
+        <a href="/planning">
+          <div className="flex justify-center">
+            <div className="box-content flex rounded-2xl h-10 w-10 p-2 border-2 border-black justify-center">
+              <i className="text-4xl fa-solid fa-file "></i>
+            </div>
+          </div>
+        </a>
       </div>
       <Navbar />
     </div>
