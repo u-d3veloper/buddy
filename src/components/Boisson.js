@@ -7,18 +7,15 @@ const Boisson = ({ nom, prix, lien }) => {
       <p className="p-1 ">{nom}</p>
 
       {/* Image */}
-      <div id="image" className="overflow-hidden">
-        <img
-          id="Visuel_Boisson"
-          src={lien}
-          alt={nom}
-          className="w-full h-full object-cover"
-        />
-      </div>
+      <div className="">
+        <div id="image" className="overflow-hidden ">
+          <img id="Visuel_Boisson" src={lien} alt={nom} className="" />
+        </div>
 
-      {/* Prix */}
-      <div id="Prix" className="bg-zinc-600 p-2 rounded-b-3xl">
-        <p className="text-center text-xl">{prix}€</p>
+        {/* Prix */}
+        <div id="Prix" className="bg-zinc-600 p-0 rounded-b-3xl ">
+          <p className="text-center text-xl">{prix}€</p>
+        </div>
       </div>
     </div>
   );

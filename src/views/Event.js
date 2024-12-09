@@ -50,6 +50,16 @@ const boissons = [
       lien: "https://www.destinationcocktails.fr/wp-content/uploads/2019/11/cocktail-caipirinha.jpg",
     },
   ];
+  const burgerProps = {
+    lien: "https://img.freepik.com/photos-gratuite/burger-gastronomique-grille-fromage-tomate-oignon-frites-genere-par-intelligence-artificielle_25030-63181.jpg", // Remplace par une image de burger
+    nom: "Burger",
+    formules: [
+      { nom: "Classique", prix: 6 },
+      { nom: "Végé", prix: 5 },
+    ],
+    infoMenu: "+1€ soft", // Information complémentaire
+  };
+
 
 
 
@@ -110,7 +120,9 @@ const boissons = [
           {" "}
           <ListeBoissons boissons={boissons} />{" "}
         </div>
-        <div className="nourriture"></div>
+        <div className="nourriture">
+          <Nourriture props={burgerProps} />
+        </div>
         <div className="footer">
           <p> vestiaire, summeria</p>
         </div>

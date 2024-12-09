@@ -1,14 +1,14 @@
 import React from "react";
 
-const Nourriture = (props) => {
+const Nourriture = ({props}) => {
   return (
-    <div className="w-3/4 flex mx-auto bg-zinc-700 border-solid rounded-3xl ">
-      <div id="image" className="w-1/2 ">
+    <div className="ml-6 mr-12 flex mx-auto bg-zinc-700 border-solid rounded-3xl overflow-hidden">
+      <div id="image" className="w-4/5 ">
         <img
           id="Visuel_Nourriture"
           src={props.lien}
           alt={props.nom}
-          className=" w-full h-full object-cover object-[70%] "
+          className=" w-full h-full object-cover  "
         />
       </div>
 
@@ -18,12 +18,12 @@ const Nourriture = (props) => {
         </p>
         <ul className="mb-4 list-disc pl-5">
           {props.formules.map((formule, index) => (
-          <li key={index}>
-            <div className="flex justify-between mb-2">
-              <p>{formule.nom}</p>
-              <p>{formule.prix}€</p>
-            </div>
-          </li>
+            <li key={index}>
+              <div className="flex justify-between mb-2">
+                <p>{formule.nom}</p>
+                <p>{formule.prix}€</p>
+              </div>
+            </li>
           ))}
         </ul>
         <p id="Menu" className="text-center ">

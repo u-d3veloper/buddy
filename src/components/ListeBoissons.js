@@ -3,7 +3,7 @@ import Boisson from "./Boisson";
 
 const ListeBoissons = ({ boissons }) => {
   return (
-    <div className="overflow-x-auto flex space-x-8 p-4 rounded-lg shadow-inner">
+    <div className=" overflow-x-auto flex space-x-8 p-6 my-3 rounded-lg shadow-inner ">
       {boissons.map((boisson, index) => (
         <Boisson
           key={index}
