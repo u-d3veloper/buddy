@@ -35,7 +35,7 @@ const Home = () => {
               <i class="fa-solid fa-plus"></i>
             </li></a>
             {data.map(item => (
-              <a href={`/eventInfo/${item.id}`} key={item.id}>
+              <a href={`/eventInfo/${item.title}`} key={item.title}>
                 <li className='border-2 border-black rounded-3xl mx-3 p-2 flex'>
                 <img src={item.image} alt={item.title} className='rounded-3xl object-cover h-full w-1/3 mr-2' />
                 <div className='flex flex-col justify-center ml-2'>

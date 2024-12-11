@@ -80,15 +80,6 @@ export default function Profile() {
 
         {error && <p className="text-red-500 mt-4">Erreur : {error}</p>} {/* Affichage des erreurs */}
       </div>
-      <div>
-        <a href="/planning">
-          <div className="flex justify-center">
-            <div className="box-content flex rounded-2xl h-10 w-10 p-2 border-2 border-black justify-center">
-              <i className="text-4xl fa-solid fa-file "></i>
-            </div>
-          </div>
-        </a>
-      </div>
       <Navbar />
     </div>
   );

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Banner from '../Components/Banner';
+import Banner from '../Components/Banner.jsx';
 import Navbar from "../Components/Navbar";
 import Tache from '../Components/Tache.jsx' ;
 import Papa from 'papaparse';
-import { fetchCollection } from '../services/fetchData';
+import { useParams } from 'react-router-dom';
 
-export default function Planning({soiree}) {
+export default function Planning() {
     const [csvData, setCsvData] = useState([]);
     const [columnIndex, setColumnIndex] = useState(null);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
+
+    let { title } = useParams();
   
     // Charger l'utilisateur depuis le localStorage uniquement au montage du composant
     useEffect(() => {
@@ -17,7 +19,7 @@ export default function Planning({soiree}) {
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
         try {
-          setUser(JSON.parse(storedUser)); // Valider et définir l'utilisateur si trouvé
+          setUser(JSON.parse(storedUser)); // Valtitleer et définir l'utilisateur si trouvé
         } catch (err) {
           console.error('Erreur lors du parsing de localStorage :', err.message);
           localStorage.removeItem('user'); // Nettoyer les données corrompues
@@ -26,8 +28,8 @@ export default function Planning({soiree}) {
     }, [user]);
 
     // Charge le fichier CSV du planning
-    const loadCSV = (soiree) => {
-      Papa.parse('/planning/'+soiree+'.csv', {
+    const loadCSV = (title) => {
+      Papa.parse('/planning/'+title+'.csv', {
         download: true,
         header: true,
         dynamicTyping: true,
@@ -64,7 +66,7 @@ export default function Planning({soiree}) {
     };
 
     useEffect(() => {
-      loadCSV(soiree);
+      loadCSV(title);
       const storedUser = localStorage.getItem('user');
       if (csvData.length && storedUser) {
         const headers = Object.keys(csvData[0]);
@@ -81,7 +83,7 @@ export default function Planning({soiree}) {
         {user ? (
           <div>
             <div className="container flex justify-center text-lg font-bold">
-                <p>Planning de {soiree}</p>
+                <p>Planning de {title}</p>
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {columnIndex !== null && (
