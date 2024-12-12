@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 // React Router imports
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -15,8 +14,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile/> } />
-        <Route path="/event/:id" element={<Event />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/event/" element={<Event />} />
         <Route path="/eventInfo/:id" element={<EventInfo />} />
       </Routes>
     </Router>
