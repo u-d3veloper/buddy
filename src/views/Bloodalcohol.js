@@ -10,7 +10,7 @@ export default function BloodAlcohol() {
     const [weight, setWeight] = useState('');
     const [gender, setGender] = useState('masculin');
     const [drinkCount, setDrinkCount] = useState(0);
-    const [probation, setProbatoire] = useState(false);
+    const [probation, setProbation] = useState(false);
     const [result, setResult] = useState(null);
     const [alcoholLevel, setAlcoholLevel] = useState(null);
 
@@ -53,7 +53,7 @@ export default function BloodAlcohol() {
 
             <WeightInput weight={weight} setWeight={setWeight} />
             <GenderSelector gender={gender} setGender={setGender} />
-            <ProbationToggle probation={probation} setProbatoire={setProbatoire} />
+            <ProbationToggle probation={probation} setProbation={setProbation} />
             <DrinkCounter drinkCount={drinkCount} addDrink={addDrink} removeDrink={removeDrink} />
 
             <div className="mb-6">
