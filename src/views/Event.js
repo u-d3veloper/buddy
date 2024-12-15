@@ -3,6 +3,7 @@ import VSS from "../components/VSS";
 import Nourriture from "../components/Nourriture";
 import Boisson from "../components/Boisson";
 import ListeBoissons from "../components/ListeBoissons";
+import TicketBanner from "../components/TicketBanner";
 import Footer from "../components/FooterEvent";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -28,6 +29,15 @@ export default function Event() {
 
     getData();
   }, []);
+  const [showBanner, setShowBanner] = useState(false);
+
+  const handleTicketClick = () => {
+    setShowBanner(true); // Affiche le bandeau
+  };
+
+  const handleCloseBanner = () => {
+    setShowBanner(false); // Cache le bandeau
+  };
 
   const boissons = [
     {
@@ -63,24 +73,20 @@ export default function Event() {
 
   return (
     <div>
-      <div className="bg-black	r h-screen w-screen text-white	" id="wrapper">
+      <div className="bg-zinc-900 h-screen w-screen text-white" id="wrapper">
         <div
           className="flex items-center justify-between w-full px-4 py-3"
           id="header"
         >
           <i className="fa-solid fa-train-tram text-3xl"></i>
-
           <p className="text-2xl font-bold">Buddy</p>
-
           <i className="fa-solid fa-glass-cheers text-3xl"></i>
         </div>
 
         <div className="flex items-center justify-between w-full px-4">
           <i className="fa-solid fa-chevron-left text-white text-xl"></i>
-
           <div className="flex items-center space-x-2">
             <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
-
             <div className="w-[255px] h-[41px] bg-white border border-gray-300 flex rounded-[21px] items-center justify-center">
               <span className="text-gray-700 text-sm font-medium">
                 Texte à l'intérieur
@@ -88,14 +94,14 @@ export default function Event() {
             </div>
           </div>
         </div>
+
         <div className="flex items-center w-full py-3" id="infos">
           <img
             src="https://lkb-blog-images.linkaband.com/blog-musique/animation-musicale/organiser-soiree-halloween/102119-thumbnail-resized-BLOG_SEO.jpg"
             alt="soirée"
             className="w-[208px] h-[171px] object-cover rounded-r-[61px]"
           />
-
-          <div className="flex flex-col  items-end justify-center font-medium w-full h-full ">
+          <div className="flex flex-col items-end justify-center font-medium w-full h-full">
             <div className="flex items-center space-x-2">
               <p>Horaire</p>
               <i className="fa-solid fa-clock text-xl"></i>
@@ -111,14 +117,17 @@ export default function Event() {
           <VSS VSSName="Lisa" />
         </div>
         <div className="boissons">
-          {" "}
-          <ListeBoissons boissons={boissons} />{" "}
+          <ListeBoissons boissons={boissons} />
         </div>
         <div className="nourriture">
           <Nourriture props={burgerProps} />
         </div>
         <div>
-          <Footer />
+          {/* Footer */}
+          <Footer onTicketClick={handleTicketClick} />
+
+          {/* Bandeau Ticket */}
+          {showBanner && <TicketBanner onClose={handleCloseBanner} />}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Paiement = () => {
   return (
-    <div className="flex items-center justify-center bg-[#167974] rounded-full px-6 mb-10 w-4/5">
+    <div className="flex items-center justify-center bg-[#167974] rounded-full px-6 mb-10">
       <img
         src="https://finance-heros.fr/wp-content/uploads/2022/06/sumeria_app_icon_1600.png"
         alt="Logo Sumeria"
@@ -10,7 +10,8 @@ const Paiement = () => {
       />
       <div className="flex flex-col leading-tight text-center">
         <p className="text-white font-bold text-lg">Payer</p>
-        <p className="text-white font-bold text-lg">avec Sumeria</p>
+        <p className="text-white font-bold text-lg">avec</p>
+        <p className="text-white font-bold text-lg">Sumeria</p>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 
 const Nourriture = ({props}) => {
   return (
-    <div className="ml-6 mr-12 flex mx-auto bg-zinc-700 border-solid rounded-3xl overflow-hidden">
+    <div className="ml-6 mr-12 my-4 flex mx-auto bg-zinc-700 border-solid rounded-3xl overflow-hidden">
       <div id="image" className="w-4/5 ">
         <img
           id="Visuel_Nourriture"
