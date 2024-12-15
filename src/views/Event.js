@@ -3,32 +3,33 @@ import VSS from "../components/VSS";
 import Nourriture from "../components/Nourriture";
 import Boisson from "../components/Boisson";
 import ListeBoissons from "../components/ListeBoissons";
-import { useParams} from "react-router-dom";
+import Footer from "../components/FooterEvent";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchEvent } from "../services/fetchEvent";
 // import { useParams } from 'react-router-dom';
 export default function Event() {
-let { id } = useParams();
-const [data, setData] = useState([]);
-const [loading, setLoading] = useState(true);
-useEffect(() => {
-  const getData = async () => {
-    try {
-      const dataList = await fetchEvent('events',id);
-      console.log('Données récupérées :', dataList);
-      setData(dataList);
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données :', error);
-    } finally {
-      setLoading(false);
-      console.log('Données dans le state :', data);
-    }
-  };
+  let { id } = useParams();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const dataList = await fetchEvent("events", id);
+        console.log("Données récupérées :", dataList);
+        setData(dataList);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+      } finally {
+        setLoading(false);
+        console.log("Données dans le state :", data);
+      }
+    };
 
-  getData();
-}, []);
+    getData();
+  }, []);
 
-const boissons = [
+  const boissons = [
     {
       nom: "Pina Collada",
       prix: "2",
@@ -60,12 +61,9 @@ const boissons = [
     infoMenu: "+1€ soft", // Information complémentaire
   };
 
-
-
-
   return (
     <div>
-      <div className="bg-zinc-800	r h-screen w-screen text-white	" id="wrapper">
+      <div className="bg-black	r h-screen w-screen text-white	" id="wrapper">
         <div
           className="flex items-center justify-between w-full px-4 py-3"
           id="header"
@@ -97,20 +95,16 @@ const boissons = [
             className="w-[208px] h-[171px] object-cover rounded-r-[61px]"
           />
 
-<div className="flex flex-col  items-end justify-center font-medium w-full h-full ">
-  <div className="flex items-center space-x-2">
-  <p>Horaire</p>
-    <i className="fa-solid fa-clock text-xl"></i>
-   
-  </div>
-  <div className="flex items-center space-x-2 mt-2">
-  <p>Lieu</p>
-    <i className="fa-solid fa-location-dot text-xl"></i>
-    
-  </div>
-</div>
-
-
+          <div className="flex flex-col  items-end justify-center font-medium w-full h-full ">
+            <div className="flex items-center space-x-2">
+              <p>Horaire</p>
+              <i className="fa-solid fa-clock text-xl"></i>
+            </div>
+            <div className="flex items-center space-x-2 mt-2">
+              <p>Lieu</p>
+              <i className="fa-solid fa-location-dot text-xl"></i>
+            </div>
+          </div>
         </div>
 
         <div className="VSS">
@@ -123,8 +117,8 @@ const boissons = [
         <div className="nourriture">
           <Nourriture props={burgerProps} />
         </div>
-        <div className="footer">
-          <p> vestiaire, summeria</p>
+        <div>
+          <Footer />
         </div>
       </div>
     </div>
