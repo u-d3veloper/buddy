@@ -1,13 +1,13 @@
-const calculator = (probatoire, poids, sexe, masse) => {
-    let r = sexe === "masculin" ? 0.68 : 0.55;
+const calculator = (test, weight, gender, mass) => {
+    let r = gender === "male" ? 0.68 : 0.55;
 
-    const taux = masse / (poids * r);
+    const rate = mass / (weight * r);
 
-    const taux_max = probatoire ? 0.2 : 0.5;
+    const maxRate = test ? 0.2 : 0.5;
 
     return {
-        taux,
-        estAuDelaDuSeuil: taux >= taux_max,
+        rate,
+        isAbove: rate >= maxRate,
     };
 };
 
