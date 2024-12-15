@@ -1,30 +1,41 @@
-// fetchData.js
-import { getFirestore, collection, getDocs, where } from 'firebase/firestore';
-import { db } from '../firebase'; // Assure-toi que ce chemin est correct
-import { query } from "firebase/firestore";
-
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase"; // Assurez-vous que ce chemin est correct
 
 export const fetchEvent = async (collectionName, id) => {
   try {
-    // Référence à la collection passée en paramètre
-    const eventsRef = collection(db, collectionName);
+    // Validation des paramètres
+    if (!collectionName || typeof collectionName !== "string") {
+      throw new Error("Le nom de la collection est invalide.");
+    }
+    if (!id || typeof id !== "string") {
+    console.log(id);
 
-    // Création de la requête pour filtrer par l'ID
-    const q = query(eventsRef, where("id", "==", id));
+      throw new Error("L'ID fourni est invalide.");
+    }
 
-    // Exécution de la requête
-    const querySnapshot = await getDocs(q);
 
-    // Extraction des données
-    const eventData = [];
-    querySnapshot.forEach((doc) => {
-      eventData.push({ id: doc.id, ...doc.data() });
-    });
+    // Référence au document
+    const docRef = doc(db, collectionName, id);
 
-    // Retourner les données (ou null si aucun résultat)
-    return eventData.length > 0 ? eventData[0] : null;
+    // Récupération du document
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Données du document récupérées :", docSnap.data());
+      return { id: docSnap.id, ...docSnap.data() }; // Ajout de l'ID au résultat
+    } else {
+      console.warn(
+        `Aucun document trouvé pour l'ID "${id}" dans la collection "${collectionName}".`
+      );
+      return null; // Retourne null si le document n'existe pas
+    }
   } catch (error) {
-    console.error("Erreur lors de la récupération des données :", error);
-    throw error;
+    console.error(
+      `Erreur lors de la récupération du document "${id}" dans la collection "${collectionName}" :`,
+      error
+    );
+    throw new Error(
+      `Impossible de récupérer le document "${id}" : ${error.message}`
+    );
   }
 };

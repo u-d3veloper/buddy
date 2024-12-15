@@ -10,25 +10,39 @@ import { useEffect, useState } from "react";
 import { fetchEvent } from "../services/fetchEvent";
 // import { useParams } from 'react-router-dom';
 export default function Event() {
-  let { id } = useParams();
-  const [data, setData] = useState([]);
+  
+  const { id } = useParams(); // Récupère l'ID depuis l'URL
+  const [eventData, setEventData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Récupération des données de l'événement
   useEffect(() => {
-    const getData = async () => {
+    const getEventData = async () => {
       try {
-        const dataList = await fetchEvent("events", id);
-        console.log("Données récupérées :", dataList);
-        setData(dataList);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données :", error);
+        // Récupère tous les documents de la collection "events"
+        const events = await fetchEvent("events",id);
+        console.log("Événements récupérés :", events);
+
+        // Filtre l'événement correspondant à l'ID dans l'URL
+        const currentEvent = events.find((event) => event.id === id);
+
+        if (!currentEvent) {
+          throw new Error("Aucun événement trouvé pour cet ID.");
+        }
+
+        setEventData(currentEvent);
+      } catch (err) {
+        console.error("Erreur lors de la récupération des données :", err);
+        setError(err.message);
       } finally {
         setLoading(false);
-        console.log("Données dans le state :", data);
       }
     };
 
-    getData();
-  }, []);
+    getEventData();
+  }, [id]);
+
   const [showBanner, setShowBanner] = useState(false);
 
   const handleTicketClick = () => {
@@ -89,7 +103,7 @@ export default function Event() {
             <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
             <div className="w-[255px] h-[41px] bg-white border border-gray-300 flex rounded-[21px] items-center justify-center">
               <span className="text-gray-700 text-sm font-medium">
-                Texte à l'intérieur
+                Soirée Halloween
               </span>
             </div>
           </div>

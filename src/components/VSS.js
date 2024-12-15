@@ -1,12 +1,40 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { fetchVSS } from "../services/fetchVSS";
 
-
-const VSS = ({VSSName}) => {
+export default function VSS({ VSSInfos }) {
+  const [dataVSS, setDataVSS] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      if (!VSSInfos) {
+        console.error("Aucun VSSInfos fourni !");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const dataList = await fetchVSS("users", VSSInfos);
+        console.log("Données récupérées VSS :", dataList);
+        setDataVSS(dataList);
+      } catch (error) {
+        console.error(
+          "Erreur lors de la récupération des données VSS :",
+          error
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, [VSSInfos]);
 
   return (
     <div className="relative">
@@ -33,7 +61,9 @@ const VSS = ({VSSName}) => {
             <span>Lutte Anti-VSS</span>
             {/* Icône dynamique */}
             <i
-              className={`fas ${isOpen ? "fa-chevron-up" : "fa-chevron-down"} text-[20px]`}
+              className={`fas ${
+                isOpen ? "fa-chevron-up" : "fa-chevron-down"
+              } text-[20px]`}
             ></i>
           </button>
         </div>
@@ -42,14 +72,13 @@ const VSS = ({VSSName}) => {
         {isOpen && (
           <div className="mt-2 p-4 text-sm text-center font-lalezar text-[25.21px]">
             <p>
-            Valeur saisie : <strong>{VSSName || "Aucune donnée"}</strong>
+              Valeur saisie : <strong>{VSSInfos || "Aucune donnée"}</strong>
             </p>
           </div>
         )}
       </div>
     </div>
   );
-};
+}
 
-export default VSS;
 // Il faut que le composant soit en ovrlay sur le reste de la page (pour l'instant ca bouge) et que titou mette la police sur tailwind
