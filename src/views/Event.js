@@ -94,7 +94,7 @@ export default function Event() {
         >
           <i className="fa-solid fa-train-tram text-3xl"></i>
           <p className="text-2xl font-bold">Buddy</p>
-          <i className="fa-solid fa-glass-cheers text-3xl"></i>
+          <a href="/bloodalcohol"><i className="fa-solid fa-glass-cheers text-3xl"></i></a>
         </div>
 
         <div className="flex items-center justify-between w-full px-4">
