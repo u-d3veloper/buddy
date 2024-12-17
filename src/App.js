@@ -8,6 +8,7 @@ import Home from "./views/Home";
 import Profile from "./views/Profile";
 import Event from "./views/Event";
 import EventInfo from "./views/EventInfo";
+import Planning from "./views/Planning";
 import Bloodalcohol from "./views/Bloodalcohol";
 
 function App() {
@@ -15,10 +16,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/event/" element={<Event />} />
+        <Route path="/profile" element={<Profile />} /> 
+        <Route path="/event" element={<Event />} />
         <Route path="/eventInfo/:id" element={<EventInfo />} />
-        <Route path="/bloodAlcohol" element={<Bloodalcohol />} />
+        <Route path="/planning/:title" element={<Planning/>} />
       </Routes>
     </Router>
   );

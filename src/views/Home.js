@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCollection } from '../services/fetchData'; // Assure-toi que le chemin est correct
-import Navbar from '../components/Navbar';
-import Banner from '../components/Banner';
+import Navbar from '../Components/Navbar';
+import Banner from '../Components/Banner';
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,9 +32,6 @@ const Home = () => {
           <div>Chargement...</div>
         ) : (
           <ul>
-            <a href="/eventInfo">
-              <li className="active:bg-gray-200 border-2 border-gray-700 border-dashed rounded-3xl mx-3 my-2 py-6 flex justify-center align-center">
-                <i class="fa-solid fa-plus"></i>
               </li>
             </a>
             {data.map((item) => (
