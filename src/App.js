@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 // React Router imports
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -10,6 +9,7 @@ import Profile from "./views/Profile";
 import Event from "./views/Event";
 import EventInfo from "./views/EventInfo";
 import Planning from "./views/Planning";
+import Bloodalcohol from "./views/Bloodalcohol";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} /> 
         <Route path="/event" element={<Event />} />
-        <Route path="/eventInfo/:title" element={<EventInfo />} />
+        <Route path="/eventInfo/:id" element={<EventInfo />} />
         <Route path="/planning/:title" element={<Planning/>} />
       </Routes>
     </Router>
