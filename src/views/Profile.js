@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Banner from '../components/Banner';
-import UserInfo from '../components/UserInfo';
+import Banner from '../Components/Banner';
+import UserInfo from '../Components/UserInfo';
 import { signInWithGoogle, signOutUser } from '../services/firebaseAuth';
-import Navbar from '../components/Navbar';
+import Navbar from '../Components/Navbar';
+
 export default function Profile() {
   const [user, setUser] = useState(null); // État pour stocker l'utilisateur
   const [error, setError] = useState(null); // État pour gérer les erreurs
@@ -46,7 +47,7 @@ export default function Profile() {
 
   return (
     <div className="bg-gray-50 h-screen">
-      <Banner />
+      <Banner/>
       <div className="p-4">
         {user ? ( // Si un utilisateur est connecté, afficher ses informations
           <>
